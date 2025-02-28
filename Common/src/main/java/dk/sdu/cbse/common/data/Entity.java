@@ -13,8 +13,8 @@ public class Entity implements Serializable {
     private float radius;
     private String color;
 
-    public UUID getID() {
-        return ID;
+    public String getID() {
+        return ID.toString();
     }
 
     public double[] getPolygonCoordinates() {

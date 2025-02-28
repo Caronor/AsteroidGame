@@ -51,7 +51,7 @@
           <arguments>
             <argument>--module-path=mods-mvn</argument>
             <argument>--class-path=libs/*</argument>
-            <argument>--module=Core/dk.sdu.cbse.App</argument>
+            <argument>--module=Core/dk.sdu.cbse.Main</argument>
           </arguments>
         </configuration>
       </plugin>
