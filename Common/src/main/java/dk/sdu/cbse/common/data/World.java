@@ -14,8 +14,8 @@ public class World {
         return entity.getID();
     }
 
-    public void removeEntity(String entityID) {
-        entityMap.remove(entityID);
+    public Entity getEntity(String ID) {
+        return entityMap.get(ID);
     }
 
     public void removeEntity(Entity entity) {
@@ -26,7 +26,15 @@ public class World {
         return entityMap.values();
     }
 
-    public Entity getEntity(String ID) {
-        return entityMap.get(ID);
+    public <E extends Entity> List<Entity> getEntities(Class<E>... entityTypes) {
+        List<Entity> r = new ArrayList<>();
+        for (Entity e : getEntities()) {
+            for (Class<E> entityType : entityTypes) {
+                if (entityType.equals(e.getClass())) {
+                    r.add(e);
+                }
+            }
+        }
+        return r;
     }
 }

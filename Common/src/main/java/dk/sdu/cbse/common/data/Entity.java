@@ -41,8 +41,8 @@ public class Entity implements Serializable {
         return color;
     }
 
-    public void setPolygonCoordinates(double[] polygonCoordinates) {
-        this.polygonCoordinates = polygonCoordinates;
+    public void setPolygonCoordinates(double... coordinates) {
+        this.polygonCoordinates = coordinates;
     }
 
     public void setX(double x) {
