@@ -7,6 +7,8 @@ import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.services.IGamePluginService;
 
 public class BulletPlugin implements IGamePluginService {
+    private Entity bullet;
+
     @Override
     public void start(GameData gameData, World world) {
 
@@ -14,9 +16,9 @@ public class BulletPlugin implements IGamePluginService {
 
     @Override
     public void stop(GameData gameData, World world) {
-        for (Entity entity : world.getEntities()) {
-            if (entity.getClass() == Bullet.class) {
-                world.removeEntity(entity);
+        for (Entity e : world.getEntities()) {
+            if (e.getClass() == Bullet.class) {
+                world.removeEntity(e);
             }
         }
     }

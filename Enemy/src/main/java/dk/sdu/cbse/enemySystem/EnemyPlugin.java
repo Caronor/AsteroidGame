@@ -5,48 +5,35 @@ import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.services.IGamePluginService;
 
+import java.util.Random;
+
 public class EnemyPlugin implements IGamePluginService {
-    private Entity enemy;
+    private final Random random = new Random();
+    private Entity enemyShip;
 
     public EnemyPlugin() {}
 
     @Override
     public void start(GameData gameData, World world) {
-        enemy = createEnemyShip(gameData, world);
-        world.addEntity(enemy);
+        enemyShip = createEnemyShip(gameData, world);
+        world.addEntity(enemyShip);
     }
 
     @Override
     public void stop(GameData gameData, World world) {
-        world.removeEntity(enemy);
+        world.removeEntity(enemyShip);
     }
 
     private Entity createEnemyShip(GameData gameData, World world) {
-        Entity enemyShip = new Entity();
-        enemyShip.setPolygonCoordinates(-5,-5,10,0,-5,5);
+        enemyShip = new Enemy();
 
-        double safeX, safeY;
-        boolean isSafe;
+        float x = random.nextFloat(gameData.getDisplayWidth());
+        float y = random.nextFloat(gameData.getDisplayHeight());
+        enemyShip.setX(x);
+        enemyShip.setY(y);
 
-        do {
-            isSafe = true;
-            safeX = Math.random() * gameData.getDisplayWidth();
-            safeY = Math.random() * gameData.getDisplayHeight();
-
-            for (Entity e : world.getEntities()) {
-                double dx = safeX - e.getX();
-                double dy = safeY - e.getY();
-                double distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < e.getRadius() + 50) {
-                    isSafe = false;
-                    break;
-                }
-            }
-        } while (!isSafe);
-
-        enemyShip.setX(gameData.getDisplayWidth()/2);
-        enemyShip.setY(gameData.getDisplayHeight()/2);
         enemyShip.setRadius(8);
+        enemyShip.setPolygonCoordinates(-5,-5,10,0,-5,5);
 
         return enemyShip;
     }
