@@ -9,4 +9,5 @@
     <artifactId>Common</artifactId>
     <name>Archetype - Common</name>
     <url>http://maven.apache.org</url>
+    <packaging>jar</packaging>
 </project>

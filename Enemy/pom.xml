@@ -9,6 +9,7 @@
     <artifactId>Enemy</artifactId>
     <name>Archetype - Enemy</name>
     <url>http://maven.apache.org</url>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

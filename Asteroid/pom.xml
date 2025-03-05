@@ -9,6 +9,7 @@
     <artifactId>Asteroid</artifactId>
     <name>Archetype - Asteroid</name>
     <url>http://maven.apache.org</url>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>

@@ -9,4 +9,18 @@
     <artifactId>Bullet</artifactId>
     <name>Archetype - Bullet</name>
     <url>http://maven.apache.org</url>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CommonBullet</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 </project>
