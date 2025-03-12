@@ -17,32 +17,33 @@ public class EnemyProcessor implements IEntityProcessingService {
 
     @Override
     public void process(GameData gameData, World world) {
-        for (Entity enemyShip : world.getEntities(Enemy.class)) {
+        for (Entity enemy : world.getEntities(Enemy.class)) {
             if (random.nextDouble() < 0.05) {
-                enemyShip.setRotation(random.nextInt(360));
+                enemy.setRotation(random.nextInt(360));
             }
 
             //Move forward
-            double changeX = Math.cos(Math.toRadians(enemyShip.getRotation()));
-            double changeY = Math.sin(Math.toRadians(enemyShip.getRotation()));
-            enemyShip.setX(enemyShip.getX() + changeX);
-            enemyShip.setY(enemyShip.getY() + changeY);
+            double changeX = Math.cos(Math.toRadians(enemy.getRotation()));
+            double changeY = Math.sin(Math.toRadians(enemy.getRotation()));
+
+            enemy.setX(enemy.getX() + changeX * 0.5);
+            enemy.setY(enemy.getY() + changeY * 0.5);
 
             //Wrap around screen
-            if (enemyShip.getX() < 0) {
-                enemyShip.setX(1);
+            if (enemy.getX() < 0) {
+                enemy.setX(gameData.getDisplayWidth());
             }
-            if (enemyShip.getX() > gameData.getDisplayWidth()) {
-                enemyShip.setX(gameData.getDisplayWidth() - 1);
+            if (enemy.getX() > gameData.getDisplayWidth()) {
+                enemy.setX(0);
             }
-            if (enemyShip.getY() < 0) {
-                enemyShip.setY(1);
+            if (enemy.getY() < 0) {
+                enemy.setY(gameData.getDisplayHeight());
             }
-            if (enemyShip.getY() > gameData.getDisplayHeight()) {
-                enemyShip.setY(gameData.getDisplayHeight() - 1);
+            if (enemy.getY() > gameData.getDisplayHeight()) {
+                enemy.setY(0);
             }
-            if (random.nextDouble() < 0.03) {
-
+            if (random.nextDouble() < 0.02) {
+                shootBullet(enemy, gameData, world);
             }
         }
     }
