@@ -13,8 +13,7 @@ import java.util.List;
 import java.util.ServiceLoader;
 
 public class CollisionDetector implements IPostEntityProcessingService {
-    public CollisionDetector() {
-    }
+    public CollisionDetector() {}
 
     @Override
     public void process(GameData gameData, World world) {
@@ -22,37 +21,52 @@ public class CollisionDetector implements IPostEntityProcessingService {
 
         for (Entity entity1 : world.getEntities()) {
             for (Entity entity2 : world.getEntities()) {
-                //if the two entities are identical, skip the iteration
                 if (entity1.getID().equals(entity2.getID())) {
                     continue;
                 }
 
-                // Collision Detection
+                // Skip if already marked for removal (prevents double splitting)
+                if (toRemove.contains(entity1) || toRemove.contains(entity2)) {
+                    continue;
+                }
+
                 if (this.collides(entity1, entity2)) {
-                    // If a bullet hits an asteroid, split the asteroid instead of removing it
-                    if (entity1 instanceof Bullet && entity2 instanceof Asteroid) {
-                        handleAsteroidSplit(entity2, world);
-                        toRemove.add(entity1); // Remove bullet
-                        toRemove.add(entity2); // Remove asteroid (replaced by split ones)
-                    } else if (entity2 instanceof Bullet && entity1 instanceof Asteroid) {
-                        handleAsteroidSplit(entity1, world);
-                        toRemove.add(entity1); // Remove asteroid
-                        toRemove.add(entity2); // Remove bullet
+                    if ((entity1 instanceof Bullet && entity2 instanceof Asteroid) ||
+                            (entity2 instanceof Bullet && entity1 instanceof Asteroid)) {
+
+                        Entity asteroid = (entity1 instanceof Asteroid) ? entity1 : entity2;
+                        Entity bullet = (entity1 instanceof Bullet) ? entity1 : entity2;
+
+                        handleAsteroidSplit(asteroid, world);
+                        toRemove.add(asteroid);
+                        toRemove.add(bullet);
+
+                    } else if (entity1 instanceof Bullet && entity2 instanceof Bullet) {
+                        // Ignore bullet vs bullet collisions
+                        continue;
+                    } else if (entity1 instanceof Asteroid && entity2 instanceof Asteroid) {
+                        // Ignore asteroid vs asteroid collisions
+                        continue;
                     } else {
-                        // Default behavior: remove both entities
+                        // Default removal for other valid cases
                         toRemove.add(entity1);
                         toRemove.add(entity2);
                     }
                 }
             }
         }
+
+        for (Entity entity : toRemove) {
+            world.removeEntity(entity);
+        }
     }
 
     private void handleAsteroidSplit(Entity asteroid, World world) {
         IAsteroidSplitter splitter = getAsteroidSplitter();
-        if (splitter != null) {
-            splitter.createSplitAsteroid(asteroid, world);
+        if (splitter == null) {
+            return;
         }
+        splitter.createSplitAsteroid(asteroid, world);
     }
 
     public Boolean collides(Entity entity1, Entity entity2) {
