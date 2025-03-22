@@ -12,6 +12,7 @@ public class Entity implements Serializable {
     private double rotation;
     private float radius;
     private String color;
+    private int health;
 
     public String getID() {
         return ID.toString();
@@ -41,6 +42,10 @@ public class Entity implements Serializable {
         return color;
     }
 
+    public int getHealth() {
+        return health;
+    }
+
     public void setPolygonCoordinates(double... coordinates) {
         this.polygonCoordinates = coordinates;
     }
@@ -63,5 +68,9 @@ public class Entity implements Serializable {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 }

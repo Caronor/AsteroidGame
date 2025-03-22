@@ -47,10 +47,16 @@ public class CollisionDetector implements IPostEntityProcessingService {
                     } else if (entity1 instanceof Asteroid && entity2 instanceof Asteroid) {
                         // Ignore asteroid vs asteroid collisions
                         continue;
-                    } else {
-                        // Default removal for other valid cases
-                        toRemove.add(entity1);
-                        toRemove.add(entity2);
+                    } else if (entity1 instanceof Bullet || entity2 instanceof Bullet) {
+                        Entity ship = (entity1 instanceof Bullet) ? entity2 : entity1;
+                        Entity bullet = (entity1 instanceof Bullet) ? entity1 : entity2;
+
+                        ship.setHealth(ship.getHealth() - 1);
+                        toRemove.add(bullet);
+
+                        if (ship.getHealth() <= 0) {
+                            toRemove.add(ship);
+                        }
                     }
                 }
             }
@@ -78,7 +84,7 @@ public class CollisionDetector implements IPostEntityProcessingService {
 
     private IAsteroidSplitter getAsteroidSplitter() {
         for (IAsteroidSplitter splitter : ServiceLoader.load(IAsteroidSplitter.class)) {
-            return splitter; // Return the first found implementation
+            return splitter;
         }
         return null;
     }
