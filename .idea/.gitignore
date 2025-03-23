@@ -7,5 +7,5 @@
 /dataSources/
 /dataSources.local.xml
 
-/mods-mvn/
-/libs/
+mods-mvn/
+libs/
