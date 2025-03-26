@@ -1,4 +1,4 @@
-dk/sdu/cbse/enemySystem/EnemyProcessor.class
-dk/sdu/cbse/enemySystem/Enemy.class
+dk/sdu/cbse/EnemyProcessor.class
+dk/sdu/cbse/EnemyPlugin.class
 module-info.class
-dk/sdu/cbse/enemySystem/EnemyPlugin.class
+dk/sdu/cbse/Enemy.class
