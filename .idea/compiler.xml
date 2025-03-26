@@ -21,12 +21,14 @@
         <module name="Player" />
         <module name="Asteroids" />
         <module name="Enemy" />
-        <module name="Collision" />
         <module name="CommonAsteroid" />
         <module name="CommonBullet" />
         <module name="Core" />
         <module name="Common" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Collision" target="9" />
+    </bytecodeTargetLevel>
   </component>
 </project>
