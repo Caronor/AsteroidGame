@@ -1,4 +1,5 @@
 module-info.class
+dk/sdu/cbse/asteroids/Asteroid.class
 dk/sdu/cbse/asteroids/AsteroidPlugin.class
 dk/sdu/cbse/asteroids/AsteroidProcessor.class
 dk/sdu/cbse/asteroids/AsteroidSplitter.class

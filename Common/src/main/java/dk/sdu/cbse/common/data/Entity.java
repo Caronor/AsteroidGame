@@ -13,6 +13,7 @@ public class Entity implements Serializable {
     private float radius;
     private String color;
     private int health;
+    private boolean isCollided;
 
     public String getID() {
         return ID.toString();
@@ -46,6 +47,10 @@ public class Entity implements Serializable {
         return health;
     }
 
+    public boolean isCollided() {
+        return isCollided;
+    }
+
     public void setPolygonCoordinates(double... coordinates) {
         this.polygonCoordinates = coordinates;
     }
@@ -72,5 +77,9 @@ public class Entity implements Serializable {
 
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    public void setCollided(boolean collided) {
+        isCollided = collided;
     }
 }

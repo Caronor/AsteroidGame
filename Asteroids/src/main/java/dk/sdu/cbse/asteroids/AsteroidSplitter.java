@@ -1,16 +1,16 @@
 package dk.sdu.cbse.asteroids;
 
-import dk.sdu.cbse.common.asteroids.Asteroid;
-import dk.sdu.cbse.common.asteroids.IAsteroidSplitter;
 import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.World;
 
-public class AsteroidSplitter implements IAsteroidSplitter {
-    @Override
+public class AsteroidSplitter {
     public void createSplitAsteroid(Entity entity, World world) {
         if (entity.getRadius() < 10) {
+            world.removeEntity(entity);
             return;
         }
+
+        world.removeEntity(entity);
 
         float newRadius = entity.getRadius() / 2;
 
@@ -19,10 +19,10 @@ public class AsteroidSplitter implements IAsteroidSplitter {
         Entity asteroid1 = new Asteroid();
         Entity asteroid2 = new Asteroid();
 
-        asteroid1.setX(entity.getX() + splitOffset);
-        asteroid1.setY(entity.getY() + splitOffset);
-        asteroid2.setX(entity.getX() - splitOffset);
-        asteroid2.setY(entity.getY() - splitOffset);
+        //asteroid1.setX(entity.getX() + splitOffset);
+        //asteroid1.setY(entity.getY() + splitOffset);
+        //asteroid2.setX(entity.getX() - splitOffset);
+        //asteroid2.setY(entity.getY() - splitOffset);
 
         asteroid1.setRadius(newRadius);
         asteroid2.setRadius(newRadius);

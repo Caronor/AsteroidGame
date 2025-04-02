@@ -12,7 +12,6 @@
     <module>Common</module>
     <module>Enemy</module>
     <module>Asteroids</module>
-    <module>CommonAsteroid</module>
     <module>CommonBullet</module>
     <module>Bullet</module>
       <module>Collision</module>

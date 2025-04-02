@@ -1,15 +1,21 @@
 package dk.sdu.cbse.asteroids;
 
-import dk.sdu.cbse.common.asteroids.Asteroid;
 import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
 import dk.sdu.cbse.common.services.IEntityProcessingService;
 
+import java.util.ServiceLoader;
+
 public class AsteroidProcessor implements IEntityProcessingService {
     @Override
     public void process(GameData gameData, World world) {
         for (Entity asteroid : world.getEntities(Asteroid.class)) {
+            if (asteroid.isCollided()) {
+                AsteroidSplitter splitter = new AsteroidSplitter();
+                splitter.createSplitAsteroid(asteroid, world);
+            }
+
             double changeX = Math.cos(Math.toRadians(asteroid.getRotation()));
             double changeY = Math.sin(Math.toRadians(asteroid.getRotation()));
 
