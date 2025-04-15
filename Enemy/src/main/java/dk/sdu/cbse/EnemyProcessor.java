@@ -17,7 +17,7 @@ public class EnemyProcessor implements IEntityProcessingService {
 
     @Override
     public void process(GameData gameData, World world) {
-        for (Entity enemy : world.getEntities(Enemy.class)) {
+        for (Entity enemy : world.getEntities(Player.class)) {
             if (random.nextDouble() < 0.05) {
                 enemy.setRotation(random.nextInt(360));
             }

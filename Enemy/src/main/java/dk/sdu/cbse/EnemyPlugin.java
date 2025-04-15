@@ -25,7 +25,7 @@ public class EnemyPlugin implements IGamePluginService {
     }
 
     private Entity createEnemyShip(GameData gameData, World world) {
-        enemyShip = new Enemy();
+        enemyShip = new Player();
 
         float x = random.nextFloat(gameData.getDisplayWidth());
         float y = random.nextFloat(gameData.getDisplayHeight());
