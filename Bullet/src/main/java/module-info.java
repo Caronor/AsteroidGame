@@ -5,9 +5,6 @@ import dk.sdu.cbse.common.services.IGamePluginService;
 module Bullet {
     requires Common;
     requires CommonBullet;
-    requires spring.context;
-
-    exports dk.sdu.cbse.bulletsystem to spring.beans, spring.context, spring.core;
 
     provides IGamePluginService with dk.sdu.cbse.bulletsystem.BulletPlugin;
     provides BulletSPI with dk.sdu.cbse.bulletsystem.BulletControlSystem;
