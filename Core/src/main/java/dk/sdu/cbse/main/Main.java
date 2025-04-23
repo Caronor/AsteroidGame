@@ -20,6 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Main extends Application {
 
@@ -27,6 +28,7 @@ public class Main extends Application {
     private final World world = new World();
     private final Map<Entity, Polygon> polygons = new ConcurrentHashMap<>();
     private final Pane gameWindow = new Pane();
+    private final AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext("dk.sdu.cbse");
 
     public static void main(String[] args) {
         launch(Main.class);
@@ -70,7 +72,7 @@ public class Main extends Application {
         });
 
         // Lookup all Game Plugins using ServiceLoader
-        for (IGamePluginService iGamePlugin : getPluginServices()) {
+        for (IGamePluginService iGamePlugin : pluginServices) {
             iGamePlugin.start(gameData, world);
         }
         for (Entity entity : world.getEntities()) {
@@ -97,10 +99,10 @@ public class Main extends Application {
     }
 
     private void update() {
-        for (IEntityProcessingService entityProcessorService : getEntityProcessingServices()) {
+        for (IEntityProcessingService entityProcessorService : entityProcessingServices) {
             entityProcessorService.process(gameData, world);
         }
-        for (IPostEntityProcessingService postEntityProcessorService : getPostEntityProcessingServices()) {
+        for (IPostEntityProcessingService postEntityProcessorService : postEntityProcessingServices) {
             postEntityProcessorService.process(gameData, world);
         }
     }
@@ -127,15 +129,7 @@ public class Main extends Application {
         }
     }
 
-    private Collection<? extends IGamePluginService> getPluginServices() {
-        return ServiceLoader.load(IGamePluginService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
-    }
-
-    private Collection<? extends IEntityProcessingService> getEntityProcessingServices() {
-        return ServiceLoader.load(IEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
-    }
-
-    private Collection<? extends IPostEntityProcessingService> getPostEntityProcessingServices() {
-        return ServiceLoader.load(IPostEntityProcessingService.class).stream().map(ServiceLoader.Provider::get).collect(toList());
-    }
+    Collection<IGamePluginService> pluginServices = context.getBeansOfType(IGamePluginService.class).values();
+    Collection<IEntityProcessingService> entityProcessingServices = context.getBeansOfType(IEntityProcessingService.class).values();
+    Collection<IPostEntityProcessingService> postEntityProcessingServices = context.getBeansOfType(IPostEntityProcessingService.class).values();
 }
