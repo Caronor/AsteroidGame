@@ -1,6 +1,5 @@
 package dk.sdu.cbse.collisionSystem;
 
-import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
 import org.junit.jupiter.api.AfterEach;
@@ -13,8 +12,8 @@ class CollisionDetectorTest {
     private CollisionDetector detector;
     private GameData gameData;
     private World world;
-    private Entity entity1;
-    private Entity entity2;
+    private TestPlayer entity1;
+    private TestBullet entity2;
 
     @BeforeEach
     void setUp() {
@@ -22,12 +21,12 @@ class CollisionDetectorTest {
         gameData = new GameData();
         world = new World();
 
-        entity1 = new Entity();
+        entity1 = new TestPlayer();
         entity1.setRadius(8);
         entity1.setHealth(3);
         entity1.setPolygonCoordinates(-5,-5,10,0,-5,5);
 
-        entity2 = new Entity();
+        entity2 = new TestBullet();
         entity2.setRadius(1);
         entity2.setPolygonCoordinates(-5,-5,10,0,-5,5);
 
