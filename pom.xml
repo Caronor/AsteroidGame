@@ -14,7 +14,8 @@
     <module>Asteroids</module>
     <module>CommonBullet</module>
     <module>Bullet</module>
-      <module>Collision</module>
+    <module>Collision</module>
+    <module>ScoringSystem</module>
   </modules>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
