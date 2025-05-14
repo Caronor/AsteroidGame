@@ -8,12 +8,18 @@ import dk.sdu.cbse.common.services.IEntityProcessingService;
 import dk.sdu.cbse.common.services.IGamePluginService;
 import dk.sdu.cbse.common.services.IPostEntityProcessingService;
 import javafx.animation.AnimationTimer;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -26,6 +32,7 @@ public class Game {
     private final List<IGamePluginService> gamePluginServices;
     private final List<IEntityProcessingService> entityProcessingServiceList;
     private final List<IPostEntityProcessingService> postEntityProcessingServices;
+    private final Text asteroidCounterText = new Text(10, 20, "Destroyed asteroids: 0");
 
     public Game(List<IGamePluginService> gamePluginServices, List<IEntityProcessingService> entityProcessingServiceList, List<IPostEntityProcessingService> postEntityProcessingServices) {
         this.gamePluginServices = gamePluginServices;
@@ -33,10 +40,9 @@ public class Game {
         this.postEntityProcessingServices = postEntityProcessingServices;
     }
 
-    public void start(Stage window) throws Exception {
-        Text text = new Text(10, 20, "Destroyed asteroids: 0");
+    public void start(Stage window) {
+        gameWindow.getChildren().add(asteroidCounterText);
         gameWindow.setPrefSize(gameData.getDisplayWidth(), gameData.getDisplayHeight());
-        gameWindow.getChildren().add(text);
 
         Scene scene = new Scene(gameWindow);
         scene.setOnKeyPressed(event -> {
@@ -106,10 +112,15 @@ public class Game {
 
     private void draw() {
         for (Entity polygonEntity : polygons.keySet()) {
-            if(!world.getEntities().contains(polygonEntity)){
-                Polygon removedPolygon = polygons.get(polygonEntity);
-                polygons.remove(polygonEntity);
-                gameWindow.getChildren().remove(removedPolygon);
+            if(!world.getEntities().contains(polygonEntity)) {
+                if (isAsteroid(polygonEntity)) {
+                    long updatedScore = updateAsteroidScore();
+                    asteroidCounterText.setText("Destroyed asteroids: " + updatedScore);
+
+                    Polygon removedPolygon = polygons.get(polygonEntity);
+                    polygons.remove(polygonEntity);
+                    gameWindow.getChildren().remove(removedPolygon);
+                }
             }
         }
 
@@ -124,6 +135,32 @@ public class Game {
             polygon.setTranslateY(entity.getY());
             polygon.setRotate(entity.getRotation());
         }
+    }
+
+    public long updateAsteroidScore() {
+        try {
+            URL url = new URL("http://localhost:8080/score?point=1");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            int status = connection.getResponseCode();
+            if (status == 200) {
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String response = in.readLine();
+                in.close();
+                connection.disconnect();
+                return Long.parseLong(response);
+            } else {
+                System.out.println("No 200 response from microservice");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
+    private boolean isAsteroid(Entity entity) {
+        return entity.getClass().getSimpleName().contains("Asteroid");
     }
 
     public List<IGamePluginService> getIGamePluginService() {
