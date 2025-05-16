@@ -13,7 +13,7 @@ public class AsteroidProcessor implements IEntityProcessingService {
         for (Entity asteroid : world.getEntities(Asteroid.class)) {
             if (asteroid.isCollided()) {
                 AsteroidSplitter splitter = new AsteroidSplitter();
-                splitter.createSplitAsteroid(asteroid, world);
+                splitter.process(gameData, world);
             }
 
             double changeX = Math.cos(Math.toRadians(asteroid.getRotation()));
