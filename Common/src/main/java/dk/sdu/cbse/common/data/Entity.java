@@ -11,7 +11,6 @@ public class Entity implements Serializable {
     private double y;
     private double rotation;
     private float radius;
-    private String color;
     private int health;
     private boolean isCollided;
 
@@ -37,10 +36,6 @@ public class Entity implements Serializable {
 
     public float getRadius() {
         return radius;
-    }
-
-    public String getColor() {
-        return color;
     }
 
     public int getHealth() {
@@ -69,10 +64,6 @@ public class Entity implements Serializable {
 
     public void setRadius(float radius) {
         this.radius = radius;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public void setHealth(int health) {
