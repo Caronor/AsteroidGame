@@ -6,16 +6,11 @@
         <artifactId>AsteroidsFX</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>Collision</artifactId>
-    <name>Archetype - Collision</name>
+    <artifactId>IntegrationTest</artifactId>
+    <name>Archetype - IntegrationTest</name>
     <url>http://maven.apache.org</url>
-    <packaging>jar</packaging>
+
     <dependencies>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>Common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
