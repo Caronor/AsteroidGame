@@ -11,7 +11,6 @@
       <directory url="file://$PROJECT_DIR$/CommonBullet/src/main/resources/archetype-resources" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/Bullet/src/main/resources/archetype-resources" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/Collision/src/main/resources/archetype-resources" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/IntegrationTest/src/main/resources/archetype-resources" includeSubdirectories="true" />
     </excludeFromCompile>
     <annotationProcessing>
       <profile name="Maven default annotation processors profile" enabled="true">
@@ -23,7 +22,6 @@
         <module name="Asteroids" />
         <module name="Enemy" />
         <module name="Collision" />
-        <module name="IntegrationTest" />
         <module name="CommonBullet" />
         <module name="Core" />
         <module name="Common" />
