@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="dk.sdu.cbse.playerSystem.PlayerControlSystemTest" time="0.389" tests="6" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="dk.sdu.cbse.playerSystem.PlayerControlSystemTest" time="0.403" tests="6" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -13,7 +13,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="DK"/>
     <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk@17/17.0.14/libexec/openjdk.jdk/Contents/Home/lib"/>
-    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter /Users/carolinenorgaard/Documents/GitHub/AsteroidsBase/Player/target/surefire 2025-05-28T09-44-06_979-jvmRun1 surefire-20250528094407415_1tmp surefire_0-20250528094407415_2tmp"/>
+    <property name="sun.java.command" value="org.apache.maven.surefire.booter.ForkedBooter /Users/carolinenorgaard/Documents/GitHub/AsteroidsBase/Player/target/surefire 2025-05-28T16-04-17_995-jvmRun1 surefire-20250528160418406_1tmp surefire_0-20250528160418406_2tmp"/>
     <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="/Users/carolinenorgaard/Documents/GitHub/AsteroidsBase/Player/target/test-classes:/Users/carolinenorgaard/.m2/repository/junit/junit/4.13.2/junit-4.13.2.jar:/Users/carolinenorgaard/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar:/Users/carolinenorgaard/.m2/repository/org/junit/jupiter/junit-jupiter/5.13.0-RC1/junit-jupiter-5.13.0-RC1.jar:/Users/carolinenorgaard/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.13.0-RC1/junit-jupiter-api-5.13.0-RC1.jar:/Users/carolinenorgaard/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/carolinenorgaard/.m2/repository/org/junit/platform/junit-platform-commons/1.13.0-RC1/junit-platform-commons-1.13.0-RC1.jar:/Users/carolinenorgaard/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/carolinenorgaard/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.13.0-RC1/junit-jupiter-params-5.13.0-RC1.jar:/Users/carolinenorgaard/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.13.0-RC1/junit-jupiter-engine-5.13.0-RC1.jar:/Users/carolinenorgaard/.m2/repository/org/junit/platform/junit-platform-engine/1.13.0-RC1/junit-platform-engine-1.13.0-RC1.jar:/Users/carolinenorgaard/.m2/repository/org/mockito/mockito-junit-jupiter/5.18.0/mockito-junit-jupiter-5.18.0.jar:/Users/carolinenorgaard/.m2/repository/org/mockito/mockito-core/5.18.0/mockito-core-5.18.0.jar:/Users/carolinenorgaard/.m2/repository/net/bytebuddy/byte-buddy/1.17.5/byte-buddy-1.17.5.jar:/Users/carolinenorgaard/.m2/repository/net/bytebuddy/byte-buddy-agent/1.17.5/byte-buddy-agent-1.17.5.jar:/Users/carolinenorgaard/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:"/>
@@ -58,10 +58,10 @@
     <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="testLeftMovement" classname="dk.sdu.cbse.playerSystem.PlayerControlSystemTest" time="0.366"/>
+  <testcase name="testLeftMovement" classname="dk.sdu.cbse.playerSystem.PlayerControlSystemTest" time="0.38"/>
   <testcase name="testPlayerCollision" classname="dk.sdu.cbse.playerSystem.PlayerControlSystemTest" time="0.002"/>
   <testcase name="testPlayerCollisionRemovesPlayer" classname="dk.sdu.cbse.playerSystem.PlayerControlSystemTest" time="0.004"/>
-  <testcase name="testRightMovement" classname="dk.sdu.cbse.playerSystem.PlayerControlSystemTest" time="0.002"/>
-  <testcase name="testPlayerStayWithinBounds" classname="dk.sdu.cbse.playerSystem.PlayerControlSystemTest" time="0.002"/>
+  <testcase name="testRightMovement" classname="dk.sdu.cbse.playerSystem.PlayerControlSystemTest" time="0.001"/>
+  <testcase name="testPlayerStayWithinBounds" classname="dk.sdu.cbse.playerSystem.PlayerControlSystemTest" time="0.001"/>
   <testcase name="testUpMovement" classname="dk.sdu.cbse.playerSystem.PlayerControlSystemTest" time="0.002"/>
 </testsuite>
