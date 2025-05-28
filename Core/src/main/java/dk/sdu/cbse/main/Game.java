@@ -78,7 +78,7 @@ public class Game {
             polygons.put(entity, polygon);
             gameWindow.getChildren().add(polygon);
         }
-        render();
+        //render();
         window.setScene(scene);
         window.setTitle("ASTEROIDS");
         window.show();
