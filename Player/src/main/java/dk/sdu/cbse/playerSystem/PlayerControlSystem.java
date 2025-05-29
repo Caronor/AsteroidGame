@@ -22,6 +22,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
                 if (player.getHealth() <= 0) {
                     world.removeEntity(player);
                 }
+                player.setCollided(false);
             }
 
             if (gameData.getKeys().isDown(GameKeys.LEFT)) {

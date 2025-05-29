@@ -29,6 +29,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="CommonAsteroid" target="9" />
+      <module name="IntegrationTest" target="9" />
     </bytecodeTargetLevel>
   </component>
 </project>
