@@ -1,5 +1,5 @@
 <archetype>
-  <id>Player</id>
+  <id>dk.sdu.cbse.common.player.Player</id>
   <sources>
     <source>src/main/java/App.java</source>
   </sources>
