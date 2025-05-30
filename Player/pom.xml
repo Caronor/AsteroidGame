@@ -7,7 +7,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>Player</artifactId>
-    <name>Player</name>
+    <name>dk.sdu.cbse.common.player.Player</name>
     <url>http://maven.apache.org</url>
     <packaging>jar</packaging>
 
@@ -15,6 +15,11 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>CommonPlayer</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

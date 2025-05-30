@@ -4,6 +4,7 @@ import dk.sdu.cbse.common.bullet.BulletSPI;
 import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
+import dk.sdu.cbse.common.enemy.Enemy;
 import dk.sdu.cbse.common.services.IEntityProcessingService;
 
 import java.util.Collection;
@@ -17,13 +18,12 @@ public class EnemyProcessor implements IEntityProcessingService {
 
     @Override
     public void process(GameData gameData, World world) {
-        for (Entity enemy : world.getEntities(Enemy.class)) {
-            if (enemy.isCollided()) {
-                enemy.setHealth(enemy.getHealth() - 1);
-                if (enemy.getHealth() <= 0) {
-                    world.removeEntity(enemy);
-                }
-                enemy.setCollided(false);
+        for (Entity entity : world.getEntities(Enemy.class)) {
+            Enemy enemy = (Enemy) entity;
+
+            if (enemy.getHealth() <= 0) {
+                world.removeEntity(enemy);
+                continue;
             }
 
             if (random.nextDouble() < 0.05) {
