@@ -7,7 +7,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <artifactId>Asteroids</artifactId>
-    <name>Archetype - Asteroid</name>
+    <name>Asteroid</name>
     <url>http://maven.apache.org</url>
     <packaging>jar</packaging>
 
