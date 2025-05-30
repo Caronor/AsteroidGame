@@ -11,8 +11,6 @@ public class Entity implements Serializable {
     private double y;
     private double rotation;
     private float radius;
-    private int health;
-    private boolean isCollided;
 
     public String getID() {
         return ID.toString();
@@ -38,14 +36,6 @@ public class Entity implements Serializable {
         return radius;
     }
 
-    public int getHealth() {
-        return health;
-    }
-
-    public boolean isCollided() {
-        return isCollided;
-    }
-
     public void setPolygonCoordinates(double... coordinates) {
         this.polygonCoordinates = coordinates;
     }
@@ -64,13 +54,5 @@ public class Entity implements Serializable {
 
     public void setRadius(float radius) {
         this.radius = radius;
-    }
-
-    public void setHealth(int health) {
-        this.health = health;
-    }
-
-    public void setCollided(boolean collided) {
-        isCollided = collided;
     }
 }

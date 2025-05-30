@@ -3,30 +3,25 @@ package dk.sdu.cbse.enemySystem;
 import dk.sdu.cbse.common.data.Entity;
 import dk.sdu.cbse.common.data.GameData;
 import dk.sdu.cbse.common.data.World;
+import dk.sdu.cbse.common.enemy.Enemy;
 import dk.sdu.cbse.common.services.IGamePluginService;
 
 import java.util.Random;
 
 public class EnemyPlugin implements IGamePluginService {
     private final Random random = new Random();
-    private Entity enemyShip;
+    private Entity enemy;
 
     public EnemyPlugin() {}
 
     @Override
     public void start(GameData gameData, World world) {
-        enemyShip = createEnemyShip(gameData, world);
-        world.addEntity(enemyShip);
-    }
-
-    @Override
-    public void stop(GameData gameData, World world) {
-        world.removeEntity(enemyShip);
+        enemy = createEnemyShip(gameData, world);
+        world.addEntity(enemy);
     }
 
     private Entity createEnemyShip(GameData gameData, World world) {
-        enemyShip = new Enemy();
-
+        Enemy enemyShip = new Enemy();
         float x = random.nextFloat(gameData.getDisplayWidth());
         float y = random.nextFloat(gameData.getDisplayHeight());
         enemyShip.setX(x);
@@ -36,5 +31,10 @@ public class EnemyPlugin implements IGamePluginService {
         enemyShip.setHealth(3);
 
         return enemyShip;
+    }
+
+    @Override
+    public void stop(GameData gameData, World world) {
+        world.removeEntity(enemy);
     }
 }
