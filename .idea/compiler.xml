@@ -12,6 +12,9 @@
       <directory url="file://$PROJECT_DIR$/Bullet/src/main/resources/archetype-resources" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/Collision/src/main/resources/archetype-resources" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/IntegrationTest/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/CommonEnemy/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/CommonPlayer/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/CommonAsteroids/src/main/resources/archetype-resources" includeSubdirectories="true" />
     </excludeFromCompile>
     <annotationProcessing>
       <profile name="Maven default annotation processors profile" enabled="true">
@@ -20,13 +23,16 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Bullet" />
         <module name="Player" />
+        <module name="CommonEnemy" />
         <module name="Asteroids" />
         <module name="Enemy" />
         <module name="Collision" />
+        <module name="CommonAsteroids" />
         <module name="IntegrationTest" />
         <module name="CommonBullet" />
         <module name="Core" />
         <module name="Common" />
+        <module name="CommonPlayer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
