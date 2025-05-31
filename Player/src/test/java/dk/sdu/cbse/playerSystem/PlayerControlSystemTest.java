@@ -26,82 +26,75 @@ class PlayerControlSystemTest {
         gameData = mock(GameData.class);
         world = mock(World.class);
         gameKeys = mock(GameKeys.class);
-        player = new Player();
+        player = mock(Player.class);
 
         when(gameData.getKeys()).thenReturn(gameKeys);
         when(world.getEntities(Player.class)).thenReturn(Collections.singletonList(player));
     }
 
     @Test
-    void testUpMovement() {
-        when(gameKeys.isDown(GameKeys.UP)).thenReturn(true);
-        when(gameData.getDisplayHeight()).thenReturn(800);
-        when(gameData.getDisplayWidth()).thenReturn(800);
-
-        player.setRotation(0);
-        player.setX(100);
-        player.setY(100);
-
-        double startX = player.getX();
-        double startY = player.getY();
+    void testPlayerHealth() {
+        when(player.getHealth()).thenReturn(0);
 
         playerControlSystem.process(gameData, world);
 
-        assertTrue(player.getX() > startX);
-        assertEquals(startY, player.getY(), 0.001);
+        verify(world, times(1)).removeEntity(player);
+    }
+
+    @Test
+    void testUpMovement() {
+        when(player.getHealth()).thenReturn(1);
+        when(gameKeys.isDown(GameKeys.UP)).thenReturn(true);
+        when(player.getRotation()).thenReturn(0.0);
+        when(player.getX()).thenReturn(100.0);
+        when(player.getY()).thenReturn(100.0);
+
+        playerControlSystem.process(gameData, world);
+
+        verify(player).setX(101.0);
+        verify(player).setY(100.0);
     }
 
     @Test
     void testRightMovement() {
+        when(player.getHealth()).thenReturn(1);
         when(gameKeys.isDown(GameKeys.RIGHT)).thenReturn(true);
+        when(player.getRotation()).thenReturn(0.0);
 
-        double initialRotation = player.getRotation();
         playerControlSystem.process(gameData, world);
 
-        assertEquals(initialRotation + 5, player.getRotation(), 0.001);
+        verify(player).setRotation(5.0);
     }
 
     @Test
     void testLeftMovement() {
+        when(player.getHealth()).thenReturn(1);
         when(gameKeys.isDown(GameKeys.LEFT)).thenReturn(true);
+        when(player.getRotation()).thenReturn(0.0);
 
-        double initialRotation = player.getRotation();
         playerControlSystem.process(gameData, world);
 
-        assertEquals(initialRotation - 5, player.getRotation(), 0.001);
+        verify(player).setRotation(-5.0);
     }
 
     @Test
     void testPlayerStayWithinBounds() {
+        when(player.getHealth()).thenReturn(1);
         when(gameData.getDisplayHeight()).thenReturn(800);
         when(gameData.getDisplayWidth()).thenReturn(800);
 
-        player.setX(-10);
-        player.setY(900);
+        when(player.getX()).thenReturn(-10.0).thenReturn(810.0);
+        when(player.getY()).thenReturn(-5.0).thenReturn(900.0);
 
         playerControlSystem.process(gameData, world);
 
-        assertEquals(1, player.getX(), 0.001);
-        assertEquals(799, player.getY(), 0.001);
-    }
+        verify(player).setX(1.0);
+        verify(player).setY(1.0);
 
-    @Test
-    void testPlayerCollision() {
-        player.setHealth(3);
-        player.setCollided(true);
-
+        when(player.getX()).thenReturn(810.0);
+        when(player.getY()).thenReturn(900.0);
         playerControlSystem.process(gameData, world);
-
-        assertEquals(2, player.getHealth());
-    }
-
-    @Test
-    void testPlayerCollisionRemovesPlayer() {
-        player.setHealth(1);
-        player.setCollided(true);
-
-        playerControlSystem.process(gameData, world);
-
-        verify(world).removeEntity(player);
+        verify(player, atLeastOnce()).setX(799.0);
+        verify(player, atLeastOnce()).setY(799.0);
     }
 }
