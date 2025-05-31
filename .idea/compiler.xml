@@ -30,6 +30,10 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="CommonAsteroid" target="9" />
+      <module name="CommonAsteroids" target="9" />
+      <module name="CommonEnemy" target="9" />
+      <module name="CommonPlayer" target="9" />
+      <module name="IntegrationTest" target="9" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
