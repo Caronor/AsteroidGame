@@ -6,6 +6,7 @@ module Collision {
     requires CommonEnemy;
     requires CommonAsteroids;
     requires CommonBullet;
+    requires java.net.http;
 
     uses dk.sdu.cbse.common.asteroids.AsteroidSPI;
 

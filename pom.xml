@@ -19,6 +19,7 @@
     <module>Bullet</module>
     <module>Collision</module>
     <module>IntegrationTest</module>
+    <module>ScoringSystem</module>
   </modules>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -10,6 +10,10 @@ import dk.sdu.cbse.common.enemy.Enemy;
 import dk.sdu.cbse.common.player.Player;
 import dk.sdu.cbse.common.services.IPostEntityProcessingService;
 
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.Collection;
 import java.util.ServiceLoader;
 
@@ -31,20 +35,20 @@ public class CollisionDetector implements IPostEntityProcessingService {
                 // CollisionDetection
                 if (collides(entity1, entity2)) {
 
-                    // Asteroid and dk.sdu.cbse.common.player.Player collision
+                    // Asteroid and Player collision
                     if (entity1 instanceof Asteroid && entity2 instanceof Player) {
                         ((Player) entity2).setHealth(0);
                         return;
                     }
 
-                    // Enemy and dk.sdu.cbse.common.player.Player collision
+                    // Enemy and Player collision
                     if (entity1 instanceof Enemy && entity2 instanceof Player) {
                         ((Player) entity2).setHealth(0);
                         return;
                     }
 
                     if (entity1 instanceof Bullet) {
-                        // Bullet and dk.sdu.cbse.common.player.Player collision
+                        // Bullet and Player collision
                         if (entity2 instanceof Player) {
                             ((Player) entity2).setHealth(((Player) entity2).getHealth() - 1);
                         }
@@ -57,6 +61,7 @@ public class CollisionDetector implements IPostEntityProcessingService {
                         // Bullet and Asteroid collision
                         if (entity2 instanceof Asteroid) {
                             getAsteroidSPIs().stream().findFirst().ifPresent(asteroidSPI -> asteroidSPI.createSplitAsteroid(entity2, world));
+                            incrementScore();
                         }
                         world.removeEntity(entity1);
                     }
@@ -74,5 +79,18 @@ public class CollisionDetector implements IPostEntityProcessingService {
 
     private Collection<? extends AsteroidSPI> getAsteroidSPIs() {
         return ServiceLoader.load(AsteroidSPI.class).stream().map(ServiceLoader.Provider::get).collect(toList());
+    }
+
+    private void incrementScore() {
+        try {
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("http://localhost:8080/score/add/1"))
+                    .PUT(HttpRequest.BodyPublishers.noBody())
+                    .build();
+            client.send(request, HttpResponse.BodyHandlers.discarding());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
