@@ -27,24 +27,22 @@ public class CollisionDetector implements IPostEntityProcessingService {
                 if (entity1.getID().equals(entity2.getID())) {
                     continue;
                 }
-
-                // CollisionDetection
+                
                 if (collides(entity1, entity2)) {
-
-                    // Asteroid and dk.sdu.cbse.common.player.Player collision
+                    // Asteroid and Player collision
                     if (entity1 instanceof Asteroid && entity2 instanceof Player) {
                         ((Player) entity2).setHealth(0);
                         return;
                     }
 
-                    // Enemy and dk.sdu.cbse.common.player.Player collision
+                    // Enemy and Player collision
                     if (entity1 instanceof Enemy && entity2 instanceof Player) {
                         ((Player) entity2).setHealth(0);
                         return;
                     }
 
                     if (entity1 instanceof Bullet) {
-                        // Bullet and dk.sdu.cbse.common.player.Player collision
+                        // Bullet and Player collision
                         if (entity2 instanceof Player) {
                             ((Player) entity2).setHealth(((Player) entity2).getHealth() - 1);
                         }
